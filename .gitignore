@@ -1,0 +1,14 @@
+user_data/
+*~
+.gradle
+/build/
+out/
+google_sheets_export.sql
+*.log
+.idea/
+*.class
+*.jar
+*.war
+*.ear
+!gradle-wrapper.jar
+.gradletasknamecache

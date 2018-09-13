@@ -1,0 +1,49 @@
+group 'exactprosystems'
+version '1'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'com.bmuschko.tomcat'
+
+sourceCompatibility = 1.8
+
+buildscript {
+
+    repositories {
+        jcenter()
+    }
+    
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.4.2'
+    }
+    
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {	
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+	compile group: 'javax', name: 'javaee-web-api', version: '8.0'
+	compile group: 'javax.json', name: 'javax.json-api', version: '1.0-b01'
+	compile group: 'org.json', name: 'json', version: '20180813'
+	compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+	compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.7'
+	compile group: 'javax.enterprise', name: 'cdi-api', version: '2.0'
+	
+	
+	def tomcatVersion = '8.5.24'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+           "org.apache.tomcat.embed:tomcat-embed-logging-juli:8.5.2",
+           "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}",
+           "org.apache.tomcat.embed:tomcat-embed-websocket:${tomcatVersion}",
+           'javax.ejb:ejb-api:3.0'
+}
+
+tomcat {
+    contextPath = '/'
+    httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
+    ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
+}
